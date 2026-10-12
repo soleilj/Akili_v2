@@ -17,7 +17,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     env:
       KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
@@ -68,14 +68,14 @@ jobs:
         run: flutter build appbundle --release --build-number=$((BUILD_NUMBER + 100))
 
       - name: Upload APK
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: akili-tv-apk-${{ github.run_number }}
           path: build/app/outputs/flutter-apk/app-release.apk
 
       - name: Upload Play bundle
         if: env.KEYSTORE_BASE64 != ''
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: akili-tv-play-bundle-${{ github.run_number }}
           path: build/app/outputs/bundle/release/app-release.aab
