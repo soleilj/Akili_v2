@@ -28,9 +28,9 @@ jobs:
       BUILD_NUMBER: ${{ github.run_number }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "17"
@@ -68,14 +68,14 @@ jobs:
         run: flutter build appbundle --release --build-number=$((BUILD_NUMBER + 100))
 
       - name: Upload APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: akili-tv-apk-${{ github.run_number }}
           path: build/app/outputs/flutter-apk/app-release.apk
 
       - name: Upload Play bundle
         if: env.KEYSTORE_BASE64 != ''
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: akili-tv-play-bundle-${{ github.run_number }}
           path: build/app/outputs/bundle/release/app-release.aab
